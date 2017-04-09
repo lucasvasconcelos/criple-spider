@@ -34,7 +34,7 @@ VERSION := 0.0.1
 ### These variables should not need tweaking.
 ###
 
-SRC_DIRS := config crawler database metrics parse version
+SRC_DIRS := config crawler database metrics parse version vendor
 
 ALL_ARCH := amd64 arm arm64 ppc64le
 
