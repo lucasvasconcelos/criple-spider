@@ -1,0 +1,16 @@
+{
+    "dependencies": {
+        "github.com/influxdata/influxdb": {
+            "branch": "master"
+        },
+        "github.com/kelseyhightower/envconfig": {
+            "branch": "master"
+        },
+        "github.com/rhinoman/couchdb-go": {
+            "branch": "master"
+        },
+        "golang.org/x/net": {
+            "branch": "master"
+        }
+    }
+}
