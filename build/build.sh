@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # Copyright 2016 The Kubernetes Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,11 +14,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM ARG_FROM
+set -o errexit
+set -o nounset
+set -o pipefail
 
-MAINTAINER Lucas Vasconcelos <luksvs@gmail.com>
+if [ -z "${PKG}" ]; then
+    echo "PKG must be set"
+    exit 1
+fi
+if [ -z "${ARCH}" ]; then
+    echo "ARCH must be set"
+    exit 1
+fi
+if [ -z "${VERSION}" ]; then
+    echo "VERSION must be set"
+    exit 1
+fi
 
-ADD bin/ARG_ARCH/ARG_BIN /ARG_BIN
+export CGO_ENABLED=0
+export GOARCH="${ARCH}"
 
-USER nobody:nobody
-ENTRYPOINT ["/ARG_BIN"]
+go install                                                         \
+    -installsuffix "static"                                        \
+    -ldflags "-X ${PKG}/pkg/version.VERSION=${VERSION}"            \
+    ./...
