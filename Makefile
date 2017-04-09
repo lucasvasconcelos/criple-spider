@@ -36,7 +36,7 @@ VERSION := 0.0.1
 
 SRC_DIRS := config crawler database metrics parse pkg 
 
-ALL_ARCH := amd64 arm arm64 ppc64le
+ALL_ARCH := amd64
 
 # Set default base image dynamically for each arch
 ifeq ($(ARCH),amd64)
@@ -52,7 +52,7 @@ ifeq ($(ARCH),ppc64le)
     BASEIMAGE?=ppc64le/busybox
 endif
 
-IMAGE := $(REGISTRY)/$(BIN)-$(ARCH)
+IMAGE := $(REGISTRY)/$(BIN)
 
 BUILD_IMAGE ?= golang:1.8-alpine
 
