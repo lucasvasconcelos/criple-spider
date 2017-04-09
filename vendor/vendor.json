@@ -1,0 +1,49 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "1kVa89e/yk8L2liYiFuJrNWiXfU=",
+			"path": "github.com/influxdata/influxdb/client/v2",
+			"revision": "7c5ce27bb05ad7a917d1c1fc687b7dcaa375e8c7",
+			"revisionTime": "2017-04-06T19:18:15Z"
+		},
+		{
+			"checksumSHA1": "B9COWFtafEtUK2PeU4nBT0j4Ff4=",
+			"path": "github.com/influxdata/influxdb/models",
+			"revision": "7c5ce27bb05ad7a917d1c1fc687b7dcaa375e8c7",
+			"revisionTime": "2017-04-06T19:18:15Z"
+		},
+		{
+			"checksumSHA1": "H/J/qLqzUONXIecHHKtVZmxJZZA=",
+			"path": "github.com/influxdata/influxdb/pkg/escape",
+			"revision": "7c5ce27bb05ad7a917d1c1fc687b7dcaa375e8c7",
+			"revisionTime": "2017-04-06T19:18:15Z"
+		},
+		{
+			"checksumSHA1": "pyUcq4sKKVm0KzBSZIPpHsmDF6k=",
+			"path": "github.com/kelseyhightower/envconfig",
+			"revision": "8bf4bbfc795e2c7c8a5ea47b707453ed019e2ad4",
+			"revisionTime": "2017-02-06T22:33:54Z"
+		},
+		{
+			"checksumSHA1": "cTft+0SPX7li7lbTncAOmGDRIPg=",
+			"path": "github.com/rhinoman/couchdb-go",
+			"revision": "6ffbef452d1d3057b52386eb3f98099348551f6f",
+			"revisionTime": "2016-11-27T02:25:28Z"
+		},
+		{
+			"checksumSHA1": "vqc3a+oTUGX8PmD0TS+qQ7gmN8I=",
+			"path": "golang.org/x/net/html",
+			"revision": "a6577fac2d73be281a500b310739095313165611",
+			"revisionTime": "2017-03-08T20:54:49Z"
+		},
+		{
+			"checksumSHA1": "00eQaGynDYrv3tL+C7l9xH0IDZg=",
+			"path": "golang.org/x/net/html/atom",
+			"revision": "a6577fac2d73be281a500b310739095313165611",
+			"revisionTime": "2017-03-08T20:54:49Z"
+		}
+	],
+	"rootPath": "github.com/lucasvasconcelos/criple-spider"
+}
