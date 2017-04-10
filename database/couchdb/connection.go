@@ -12,20 +12,37 @@ import (
 
 var db *couchdb.Database
 
+const (
+	MyDB = "criple-spider"
+)
+
 func init() {
 	var timeout = time.Duration(500 * time.Millisecond)
 	AppConfig := config.GetConfig()
 	conn, _ := couchdb.NewConnection(AppConfig.DbHost, AppConfig.DbPort, timeout)
 	auth := couchdb.BasicAuth{Username: AppConfig.DbUser, Password: AppConfig.DbPassword}
 
-	_, err := conn.GetDBList()
+	dbList, err := conn.GetDBList()
 
 	if err != nil {
 		config.PrintUsage()
 		log.Fatal(err)
 	}
 
-	db = conn.SelectDB("criple-spider", &auth)
+	if !dbExists(dbList) {
+		conn.CreateDB(MyDB, &auth)
+	}
+
+	db = conn.SelectDB(MyDB, &auth)
+}
+
+func dbExists(dbList []string) bool {
+	for _, db := range dbList {
+		if db == MyDB {
+			return true
+		}
+	}
+	return false
 }
 
 func Save(htmlpage *parse.HTMLPage) error {
