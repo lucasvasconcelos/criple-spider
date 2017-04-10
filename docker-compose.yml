@@ -1,0 +1,48 @@
+version: "2"
+services:
+  influxdb:
+    image: influxdb:1.2-alpine
+    ports: 
+      - "8083:8083"
+      - "8086:8086"
+    volumes:
+      - /tmp/influxdata:/data
+    environment:
+      INFLUXDB_ADMIN_ENABLED: "true"
+      TZ: America/Sao_Paulo
+  couchdb:
+    image: couchdb:1.6.1
+    ports: 
+      - "5984:5984"
+    volumes:
+      - /tmp/couchdbdata:/data
+    environment:
+      COUCHDB_USER: "admin"
+      COUCHDB_PASSWORD: "password"
+      TZ: America/Sao_Paulo
+  grafana-criple-spider:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    depends_on:
+      - influxdb
+    links:
+      - "influxdb:influxdb-criple-spider"
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: "secret"
+      TZ: America/Sao_Paulo
+  criple-spider:
+    image: lucasvasconcelos/criple-spider:latest
+    depends_on:
+      - influxdb
+      - couchdb
+      - grafana-criple-spider
+    links:
+      - "influxdb:influxdb-criple-spider"
+      - "couchdb:couchdb-criple-spider"
+    environment:
+      CRIPLE_SPIDER_DBHOST: "couchdb-criple-spider"
+      CRIPLE_SPIDER_METRICSENABLE: "true"
+      CRIPLE_SPIDER_METRICSHOST: "http://influxdb-criple-spider"
+      TZ: America/Sao_Paulo 
+    restart: on-failure

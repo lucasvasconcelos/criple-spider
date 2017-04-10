@@ -45,12 +45,17 @@ func visitPage(url string, toVisit chan string) {
 			log.Println(err)
 		}
 
-		err = couchdb.Save(&visitedPage)
+		if len(visitedPage.Links) != 0 {
+			err = couchdb.Save(&visitedPage)
 
-		if err == nil {
-			log.Printf("%v was visited\n", visitedPage.Url)
-			influxdb.SendMetric()
+			if err == nil {
+				log.Printf("%v was visited\n", visitedPage.Url)
+				influxdb.SendMetric()
+			}
+		} else {
+			return
 		}
+
 	}
 
 	if len(visitedPage.Links) != 0 {

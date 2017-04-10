@@ -106,7 +106,7 @@ container: .container-$(DOTFILE_IMAGE) container-name
 	    -e 's|ARG_ARCH|$(ARCH)|g' \
 	    -e 's|ARG_FROM|$(BASEIMAGE)|g' \
 	    Dockerfile.in > .dockerfile-$(ARCH)
-	@docker build -t $(IMAGE):$(VERSION) -f .dockerfile-$(ARCH) .
+	@docker build -t $(IMAGE):latest -t $(IMAGE):$(VERSION) -f .dockerfile-$(ARCH) .
 	@docker images -q $(IMAGE):$(VERSION) > $@
 
 container-name:

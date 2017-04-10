@@ -11,6 +11,7 @@ import (
 )
 
 var db *couchdb.Database
+var AppConfig *config.Spec = config.GetConfig()
 
 const (
 	MyDB = "criple-spider"
@@ -18,7 +19,6 @@ const (
 
 func init() {
 	var timeout = time.Duration(500 * time.Millisecond)
-	AppConfig := config.GetConfig()
 	conn, _ := couchdb.NewConnection(AppConfig.DbHost, AppConfig.DbPort, timeout)
 	auth := couchdb.BasicAuth{Username: AppConfig.DbUser, Password: AppConfig.DbPassword}
 
