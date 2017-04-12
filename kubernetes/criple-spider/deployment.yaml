@@ -1,0 +1,31 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: criple-spider
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: criple-spider
+    spec:
+      containers:
+      - name: criple-spider
+        image: lucasvasconcelos/criple-spider:0.0.1
+        env:
+        - name: CRIPLE_SPIDER_DBHOST 
+          value: "couchdb"
+        - name: CRIPLE_SPIDER_METRICSENABLE
+          value: "true"
+        - name: CRIPLE_SPIDER_METRICSHOST
+          value: "http://influxdb"
+        - name: CRIPLE_SPIDER_MAX_CONCURRENCY
+          value: "4"
+        resources:
+          requests:
+            cpu: 500m
+            memory: 1000Mi
+          limits:
+            cpu: 700m
+            memory: 1250Mi
+

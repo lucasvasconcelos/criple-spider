@@ -1,0 +1,17 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: influxdb
+  labels:
+    app: influxdb
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: 'true'
+spec:
+  clusterIP: None
+  selector:
+    app: influxdb
+  ports:
+  - name: data
+    port: 8086
+  - name: admin
+    port: 8083

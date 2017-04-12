@@ -1,0 +1,32 @@
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: influxdb
+  labels:
+    app: influxdb
+spec:
+  serviceName: influxdb
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: influxdb
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+      - name: influxdb
+        image: influxdb:1.2-alpine
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: INFLUXDB_ADMIN_ENABLED
+          value: "true"
+        ports:
+        - name: data
+          containerPort: 8086
+        - name: admin
+          containerPort: 8083
+        resources:
+          requests:
+            cpu: 1500m
+            memory: 6500Mi
+      restartPolicy: Always

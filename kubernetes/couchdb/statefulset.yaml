@@ -1,0 +1,48 @@
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: couchdb
+  labels:
+    app: couchdb
+spec:
+  serviceName: couchdb
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: couchdb
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+      - name: couchdb
+        image: couchdb:1.6.1
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: COUCHDB_USER
+          value: "admin"
+        - name: COUCHDB_PASSWORD
+          value: "password"
+        ports:
+        - name: data
+          containerPort: 5984
+        - name: admin
+          containerPort: 5986
+        volumeMounts:
+        - name: couchdb
+          mountPath: /usr/local/var/lib/couchdb
+        resources:
+          requests:
+            cpu: 1500m
+            memory: 6500Mi 
+      restartPolicy: Always
+  volumeClaimTemplates:
+    - metadata:
+        name: couchdb
+        annotations:
+          volume.alpha.kubernetes.io/storage-class: anything
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 20Gi
+  

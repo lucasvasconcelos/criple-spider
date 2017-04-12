@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: influxdb-external
+  labels:
+    app: influxdb
+spec:
+  selector:
+    app: influxdb
+  type: "LoadBalancer"
+  ports:
+  - name: data
+    port: 8086
+  - name: admin
+    port: 8083

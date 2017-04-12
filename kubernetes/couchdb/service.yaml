@@ -1,0 +1,17 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: couchdb
+  labels:
+    app: couchdb
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: 'true'
+spec:
+  clusterIP: None
+  selector:
+    app: couchdb
+  ports:
+  - name: data
+    port: 5984
+  - name: admin
+    port: 5986
